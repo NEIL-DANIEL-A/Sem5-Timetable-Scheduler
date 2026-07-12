@@ -365,7 +365,7 @@ export default function App() {
               <GraduationCap size={14} className="text-white" />
             </div>
             <div className="flex-1">
-              <h1 className="text-sm font-semibold text-[#f5f5f7]">Roster Pro</h1>
+              <h1 className="text-sm font-semibold text-[#f5f5f7]">CSE Scheduler</h1>
               <span className="text-[10px] text-[rgba(255,255,255,0.45)]">Timetable Scheduler</span>
             </div>
             <div className="flex items-center gap-1.5">
