@@ -1,0 +1,173 @@
+@import "tailwindcss";
+
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+html, body, #root {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  font-family: 'Inter', sans-serif;
+  background: #06060b;
+  color: #e2e8f0;
+  overflow: hidden;
+}
+
+::-webkit-scrollbar {
+  width: 5px;
+  height: 5px;
+}
+::-webkit-scrollbar-track {
+  background: rgba(255,255,255,0.01);
+}
+::-webkit-scrollbar-thumb {
+  background: rgba(124,58,237,0.15);
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(124,58,237,0.35);
+}
+
+@keyframes spin-slow {
+  to { transform: rotate(360deg); }
+}
+@keyframes pulse-glow {
+  0%, 100% { opacity: 1; filter: drop-shadow(0 0 10px rgba(124,58,237,0.5)); }
+  50% { opacity: 0.5; filter: drop-shadow(0 0 2px rgba(124,58,237,0.1)); }
+}
+@keyframes slide-up {
+  from { opacity: 0; transform: translateY(16px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+@keyframes shimmer {
+  0%   { background-position: -200% center; }
+  100% { background-position:  200% center; }
+}
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50%       { transform: translateY(-4px); }
+}
+@keyframes pop-in {
+  from { transform: scale(0.92); opacity: 0; }
+  to { transform: scale(1); opacity: 1; }
+}
+@keyframes card-glow {
+  0%, 100% { box-shadow: 0 0 8px rgba(124,58,237,0.1), inset 0 0 8px rgba(255,255,255,0.01); }
+  50% { box-shadow: 0 0 16px rgba(124,58,237,0.25), inset 0 0 12px rgba(124,58,237,0.05); }
+}
+
+.animate-spin-slow  { animation: spin-slow 3s linear infinite; }
+.animate-pulse-glow { animation: pulse-glow 2.5s ease-in-out infinite; }
+.animate-slide-up   { animation: slide-up 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
+.animate-float      { animation: float 3s ease-in-out infinite; }
+
+.shimmer-text {
+  background: linear-gradient(90deg, #a78bfa 0%, #f472b6 35%, #60a5fa 70%, #a78bfa 100%);
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation: shimmer 4s linear infinite;
+}
+
+.glass {
+  background: rgba(255,255,255,0.02);
+  border: 1px solid rgba(255,255,255,0.05);
+  backdrop-filter: blur(12px);
+}
+
+.glass-strong {
+  background: rgba(10,10,18,0.7);
+  border: 1px solid rgba(255,255,255,0.08);
+  backdrop-filter: blur(24px);
+}
+
+.glow-purple {
+  box-shadow: 0 0 24px rgba(124,58,237,0.3), 0 0 48px rgba(124,58,237,0.1);
+}
+.glow-blue {
+  box-shadow: 0 0 24px rgba(59,130,246,0.3), 0 0 48px rgba(59,130,246,0.1);
+}
+
+.grid-line {
+  position: absolute;
+  left: 0;
+  right: 0;
+  border-top: 1px solid rgba(255,255,255,0.035);
+  pointer-events: none;
+}
+
+.timetable-card {
+  position: absolute;
+  border-left-width: 4px;
+  border-radius: 8px;
+  padding: 8px 10px;
+  overflow: hidden;
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  cursor: pointer;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.35);
+  animation: pop-in 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+.timetable-card:hover {
+  filter: brightness(1.2) contrast(1.05);
+  transform: scale(1.02) translateY(-1px);
+  box-shadow: 0 8px 24px rgba(0,0,0,0.5);
+  z-index: 10;
+}
+
+.strategy-btn {
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  position: relative;
+  overflow: hidden;
+}
+.strategy-btn::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, rgba(255,255,255,0.08), transparent);
+  opacity: 0;
+  transition: opacity 0.2s;
+}
+.strategy-btn:hover::before { opacity: 1; }
+.strategy-btn:active {
+  transform: scale(0.97);
+}
+
+.teacher-card {
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  cursor: pointer;
+  position: relative;
+}
+.teacher-card::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  border: 1px solid transparent;
+  pointer-events: none;
+  transition: border-color 0.25s;
+}
+.teacher-card:hover:not(.disabled) {
+  transform: translateX(4px);
+  background: rgba(255,255,255,0.05) !important;
+}
+.teacher-card:hover:not(.disabled)::after {
+  border-color: rgba(255,255,255,0.15);
+}
+.teacher-card.selected {
+  animation: card-glow 3s ease-in-out infinite;
+}
+.teacher-card.disabled {
+  opacity: 0.2;
+  filter: grayscale(0.85);
+  cursor: not-allowed;
+  transform: none !important;
+}
+
+.loader-ring {
+  border: 4px solid rgba(255,255,255,0.05);
+  border-top-color: #a78bfa;
+  border-radius: 50%;
+  animation: spin-slow 1.1s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+}

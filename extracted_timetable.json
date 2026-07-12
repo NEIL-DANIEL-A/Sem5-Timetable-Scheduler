@@ -1,0 +1,1639 @@
+{
+  "CS23532": [
+    {
+      "name": "K Anand",
+      "group": 1,
+      "slots": [
+        {
+          "day": "Friday",
+          "startTime": "12:00",
+          "endTime": "12:50",
+          "location": "8405",
+          "type": "Theory"
+        },
+        {
+          "day": "Thursday",
+          "startTime": "13:20",
+          "endTime": "15:00",
+          "location": "TLGL2",
+          "type": "Lab"
+        },
+        {
+          "day": "Thursday",
+          "startTime": "15:00",
+          "endTime": "16:40",
+          "location": "TLGLI",
+          "type": "Lab"
+        },
+        {
+          "day": "Wednesday",
+          "startTime": "10:00",
+          "endTime": "10:50",
+          "location": "B415",
+          "type": "Theory"
+        },
+        {
+          "day": "Wednesday",
+          "startTime": "13:20",
+          "endTime": "14:10",
+          "location": "B415",
+          "type": "Theory"
+        }
+      ]
+    },
+    {
+      "name": "Tamilarasu P",
+      "group": 1,
+      "slots": [
+        {
+          "day": "Friday",
+          "startTime": "12:00",
+          "endTime": "12:50",
+          "location": "10:50",
+          "type": "Theory"
+        },
+        {
+          "day": "Thursday",
+          "startTime": "13:20",
+          "endTime": "15:00",
+          "location": "TLGLI",
+          "type": "Lab"
+        },
+        {
+          "day": "Thursday",
+          "startTime": "15:00",
+          "endTime": "16:40",
+          "location": "TLFL4/5",
+          "type": "Lab"
+        },
+        {
+          "day": "Wednesday",
+          "startTime": "10:00",
+          "endTime": "10:50",
+          "location": "Classroom",
+          "type": "Theory"
+        }
+      ]
+    },
+    {
+      "name": "Balachandar J",
+      "group": 1,
+      "slots": [
+        {
+          "day": "Thursday",
+          "startTime": "15:00",
+          "endTime": "16:40",
+          "location": "TLGL3/4",
+          "type": "Lab"
+        },
+        {
+          "day": "Tuesday",
+          "startTime": "14:10",
+          "endTime": "15:00",
+          "location": "oo",
+          "type": "Theory"
+        },
+        {
+          "day": "Wednesday",
+          "startTime": "10:00",
+          "endTime": "10:50",
+          "location": "Classroom",
+          "type": "Theory"
+        }
+      ]
+    },
+    {
+      "name": "Shafiya Banu M",
+      "group": 1,
+      "slots": [
+        {
+          "day": "Friday",
+          "startTime": "12:00",
+          "endTime": "12:50",
+          "location": "8221",
+          "type": "Theory"
+        },
+        {
+          "day": "Thursday",
+          "startTime": "13:20",
+          "endTime": "15:00",
+          "location": "TLGL3/4",
+          "type": "Lab"
+        },
+        {
+          "day": "Thursday",
+          "startTime": "15:00",
+          "endTime": "16:40",
+          "location": "TLFR4/5",
+          "type": "Lab"
+        },
+        {
+          "day": "Tuesday",
+          "startTime": "14:10",
+          "endTime": "15:00",
+          "location": "B403",
+          "type": "Theory"
+        }
+      ]
+    },
+    {
+      "name": "R Sabitha",
+      "group": 1,
+      "slots": [
+        {
+          "day": "Friday",
+          "startTime": "12:00",
+          "endTime": "12:50",
+          "location": "10:50",
+          "type": "Theory"
+        },
+        {
+          "day": "Thursday",
+          "startTime": "15:00",
+          "endTime": "16:40",
+          "location": "TLGL2",
+          "type": "Lab"
+        },
+        {
+          "day": "Tuesday",
+          "startTime": "14:10",
+          "endTime": "15:00",
+          "location": "oo",
+          "type": "Theory"
+        },
+        {
+          "day": "Wednesday",
+          "startTime": "10:00",
+          "endTime": "10:50",
+          "location": "B412",
+          "type": "Theory"
+        }
+      ]
+    },
+    {
+      "name": "R sabitha",
+      "group": 1,
+      "slots": [
+        {
+          "day": "Monday",
+          "startTime": "08:00",
+          "endTime": "09:40",
+          "location": "TLFL4/5",
+          "type": "Lab"
+        },
+        {
+          "day": "Monday",
+          "startTime": "08:00",
+          "endTime": "09:40",
+          "location": "TLFR4/5",
+          "type": "Lab"
+        },
+        {
+          "day": "Monday",
+          "startTime": "08:00",
+          "endTime": "09:40",
+          "location": "TLGL2",
+          "type": "Lab"
+        },
+        {
+          "day": "Monday",
+          "startTime": "08:00",
+          "endTime": "09:40",
+          "location": "TLGLI",
+          "type": "Lab"
+        },
+        {
+          "day": "Thursday",
+          "startTime": "10:00",
+          "endTime": "10:50",
+          "location": "8221",
+          "type": "Theory"
+        },
+        {
+          "day": "Thursday",
+          "startTime": "10:00",
+          "endTime": "10:50",
+          "location": "A302",
+          "type": "Theory"
+        },
+        {
+          "day": "Thursday",
+          "startTime": "10:00",
+          "endTime": "10:50",
+          "location": "A310",
+          "type": "Theory"
+        },
+        {
+          "day": "Thursday",
+          "startTime": "11:00",
+          "endTime": "11:50",
+          "location": "A305",
+          "type": "Theory"
+        },
+        {
+          "day": "Thursday",
+          "startTime": "11:00",
+          "endTime": "11:50",
+          "location": "B210",
+          "type": "Theory"
+        },
+        {
+          "day": "Thursday",
+          "startTime": "11:00",
+          "endTime": "11:50",
+          "location": "B211",
+          "type": "Theory"
+        },
+        {
+          "day": "Thursday",
+          "startTime": "11:00",
+          "endTime": "11:50",
+          "location": "B222",
+          "type": "Theory"
+        },
+        {
+          "day": "Tuesday",
+          "startTime": "08:00",
+          "endTime": "09:40",
+          "location": "09:40",
+          "type": "Theory"
+        },
+        {
+          "day": "Tuesday",
+          "startTime": "08:00",
+          "endTime": "09:40",
+          "location": "TLFL1/2",
+          "type": "Lab"
+        },
+        {
+          "day": "Tuesday",
+          "startTime": "08:00",
+          "endTime": "09:40",
+          "location": "TLFL4/5",
+          "type": "Lab"
+        },
+        {
+          "day": "Tuesday",
+          "startTime": "08:00",
+          "endTime": "09:40",
+          "location": "TLGL2",
+          "type": "Lab"
+        },
+        {
+          "day": "Tuesday",
+          "startTime": "12:00",
+          "endTime": "12:50",
+          "location": "8320",
+          "type": "Theory"
+        },
+        {
+          "day": "Tuesday",
+          "startTime": "12:00",
+          "endTime": "12:50",
+          "location": "8321",
+          "type": "Theory"
+        },
+        {
+          "day": "Tuesday",
+          "startTime": "12:00",
+          "endTime": "12:50",
+          "location": "B408",
+          "type": "Theory"
+        },
+        {
+          "day": "Tuesday",
+          "startTime": "15:00",
+          "endTime": "15:50",
+          "location": "A102",
+          "type": "Theory"
+        },
+        {
+          "day": "Tuesday",
+          "startTime": "15:00",
+          "endTime": "15:50",
+          "location": "A203",
+          "type": "Theory"
+        }
+      ]
+    },
+    {
+      "name": "R sabitha",
+      "group": 2,
+      "slots": [
+        {
+          "day": "Monday",
+          "startTime": "08:00",
+          "endTime": "09:40",
+          "location": "Classroom",
+          "type": "Theory"
+        },
+        {
+          "day": "Thursday",
+          "startTime": "10:00",
+          "endTime": "10:50",
+          "location": "B302",
+          "type": "Theory"
+        },
+        {
+          "day": "Thursday",
+          "startTime": "11:00",
+          "endTime": "11:50",
+          "location": "8321",
+          "type": "Theory"
+        },
+        {
+          "day": "Tuesday",
+          "startTime": "08:00",
+          "endTime": "09:40",
+          "location": "TLGLI",
+          "type": "Lab"
+        },
+        {
+          "day": "Tuesday",
+          "startTime": "12:00",
+          "endTime": "12:50",
+          "location": "8220",
+          "type": "Theory"
+        }
+      ]
+    }
+  ],
+  "CS23533": [
+    {
+      "name": "Vinodh Kumar s",
+      "group": 3,
+      "slots": [
+        {
+          "day": "Thursday",
+          "startTime": "13:20",
+          "endTime": "15:00",
+          "location": "JL2",
+          "type": "Theory"
+        },
+        {
+          "day": "Thursday",
+          "startTime": "13:20",
+          "endTime": "15:00",
+          "location": "KFR04",
+          "type": "Theory"
+        },
+        {
+          "day": "Thursday",
+          "startTime": "13:20",
+          "endTime": "15:00",
+          "location": "KFROI",
+          "type": "Theory"
+        },
+        {
+          "day": "Thursday",
+          "startTime": "13:20",
+          "endTime": "15:00",
+          "location": "TLFR3",
+          "type": "Lab"
+        },
+        {
+          "day": "Thursday",
+          "startTime": "13:20",
+          "endTime": "15:00",
+          "location": "TLGL4",
+          "type": "Lab"
+        },
+        {
+          "day": "Thursday",
+          "startTime": "15:00",
+          "endTime": "16:40",
+          "location": "JL2",
+          "type": "Theory"
+        },
+        {
+          "day": "Thursday",
+          "startTime": "15:00",
+          "endTime": "16:40",
+          "location": "KFL02",
+          "type": "Lab"
+        },
+        {
+          "day": "Thursday",
+          "startTime": "15:00",
+          "endTime": "16:40",
+          "location": "KFR03",
+          "type": "Theory"
+        },
+        {
+          "day": "Thursday",
+          "startTime": "15:00",
+          "endTime": "16:40",
+          "location": "TLFR3",
+          "type": "Lab"
+        },
+        {
+          "day": "Thursday",
+          "startTime": "15:00",
+          "endTime": "16:40",
+          "location": "TLGL4",
+          "type": "Lab"
+        },
+        {
+          "day": "Tuesday",
+          "startTime": "14:10",
+          "endTime": "15:00",
+          "location": "8213",
+          "type": "Theory"
+        },
+        {
+          "day": "Tuesday",
+          "startTime": "14:10",
+          "endTime": "15:00",
+          "location": "B402",
+          "type": "Theory"
+        },
+        {
+          "day": "Wednesday",
+          "startTime": "10:00",
+          "endTime": "10:50",
+          "location": "8219",
+          "type": "Theory"
+        },
+        {
+          "day": "Wednesday",
+          "startTime": "10:00",
+          "endTime": "10:50",
+          "location": "8221",
+          "type": "Theory"
+        },
+        {
+          "day": "Wednesday",
+          "startTime": "10:00",
+          "endTime": "10:50",
+          "location": "8403",
+          "type": "Theory"
+        },
+        {
+          "day": "Wednesday",
+          "startTime": "10:00",
+          "endTime": "10:50",
+          "location": "A311",
+          "type": "Theory"
+        },
+        {
+          "day": "Wednesday",
+          "startTime": "13:20",
+          "endTime": "14:10",
+          "location": "8219",
+          "type": "Theory"
+        },
+        {
+          "day": "Wednesday",
+          "startTime": "13:20",
+          "endTime": "14:10",
+          "location": "8320",
+          "type": "Theory"
+        },
+        {
+          "day": "Wednesday",
+          "startTime": "13:20",
+          "endTime": "14:10",
+          "location": "A309",
+          "type": "Theory"
+        },
+        {
+          "day": "Wednesday",
+          "startTime": "13:20",
+          "endTime": "14:10",
+          "location": "B411",
+          "type": "Theory"
+        }
+      ]
+    },
+    {
+      "name": "Vinodh Kurnars",
+      "group": 3,
+      "slots": [
+        {
+          "day": "Monday",
+          "startTime": "15:00",
+          "endTime": "15:50",
+          "location": "A309",
+          "type": "Theory"
+        },
+        {
+          "day": "Thursday",
+          "startTime": "08:00",
+          "endTime": "08:50",
+          "location": "8219",
+          "type": "Theory"
+        },
+        {
+          "day": "Wednesday",
+          "startTime": "14:10",
+          "endTime": "15:00",
+          "location": "8220",
+          "type": "Theory"
+        },
+        {
+          "day": "Wednesday",
+          "startTime": "15:00",
+          "endTime": "16:40",
+          "location": "TLFR1/2",
+          "type": "Lab"
+        }
+      ]
+    },
+    {
+      "name": "Divya M",
+      "group": 3,
+      "slots": [
+        {
+          "day": "Monday",
+          "startTime": "14:10",
+          "endTime": "15:00",
+          "location": "A205",
+          "type": "Theory"
+        },
+        {
+          "day": "Monday",
+          "startTime": "15:00",
+          "endTime": "15:50",
+          "location": "A204",
+          "type": "Theory"
+        },
+        {
+          "day": "Wednesday",
+          "startTime": "14:10",
+          "endTime": "15:00",
+          "location": "Classroom",
+          "type": "Theory"
+        },
+        {
+          "day": "Wednesday",
+          "startTime": "15:00",
+          "endTime": "16:40",
+          "location": "Classroom",
+          "type": "Theory"
+        }
+      ]
+    },
+    {
+      "name": "P Kumar",
+      "group": 3,
+      "slots": [
+        {
+          "day": "Monday",
+          "startTime": "13:20",
+          "endTime": "15:00",
+          "location": "TLGLI",
+          "type": "Lab"
+        },
+        {
+          "day": "Monday",
+          "startTime": "15:00",
+          "endTime": "15:50",
+          "location": "A205",
+          "type": "Theory"
+        },
+        {
+          "day": "Thursday",
+          "startTime": "08:00",
+          "endTime": "08:50",
+          "location": "B405",
+          "type": "Theory"
+        },
+        {
+          "day": "Wednesday",
+          "startTime": "14:10",
+          "endTime": "15:00",
+          "location": "B410",
+          "type": "Theory"
+        }
+      ]
+    },
+    {
+      "name": "P Muneeshwari",
+      "group": 3,
+      "slots": [
+        {
+          "day": "Monday",
+          "startTime": "15:00",
+          "endTime": "15:50",
+          "location": "A102",
+          "type": "Theory"
+        },
+        {
+          "day": "Thursday",
+          "startTime": "08:00",
+          "endTime": "08:50",
+          "location": "8220",
+          "type": "Theory"
+        },
+        {
+          "day": "Wednesday",
+          "startTime": "14:10",
+          "endTime": "15:00",
+          "location": "8221",
+          "type": "Theory"
+        }
+      ]
+    }
+  ],
+  "CS23512": [
+    {
+      "name": "Parthasarathy Chandravinothan",
+      "group": 4,
+      "slots": [
+        {
+          "day": "Friday",
+          "startTime": "13:20",
+          "endTime": "14:10",
+          "location": "A102",
+          "type": "Theory"
+        },
+        {
+          "day": "Friday",
+          "startTime": "14:10",
+          "endTime": "15:00",
+          "location": "8409",
+          "type": "Theory"
+        },
+        {
+          "day": "Wednesday",
+          "startTime": "11:00",
+          "endTime": "11:50",
+          "location": "A203",
+          "type": "Theory"
+        }
+      ]
+    },
+    {
+      "name": "Bhavani M",
+      "group": 4,
+      "slots": [
+        {
+          "day": "Friday",
+          "startTime": "13:20",
+          "endTime": "14:10",
+          "location": "8408",
+          "type": "Theory"
+        },
+        {
+          "day": "Friday",
+          "startTime": "14:10",
+          "endTime": "15:00",
+          "location": "B412",
+          "type": "Theory"
+        },
+        {
+          "day": "Wednesday",
+          "startTime": "11:00",
+          "endTime": "11:50",
+          "location": "A302",
+          "type": "Theory"
+        }
+      ]
+    },
+    {
+      "name": "ponrnaniS",
+      "group": 1,
+      "slots": [
+        {
+          "day": "Friday",
+          "startTime": "13:20",
+          "endTime": "14:10",
+          "location": "B219",
+          "type": "Theory"
+        },
+        {
+          "day": "Friday",
+          "startTime": "14:10",
+          "endTime": "15:00",
+          "location": "B220",
+          "type": "Theory"
+        },
+        {
+          "day": "Wednesday",
+          "startTime": "11:00",
+          "endTime": "11:50",
+          "location": "8221",
+          "type": "Theory"
+        }
+      ]
+    },
+    {
+      "name": "E M MalathY",
+      "group": 4,
+      "slots": [
+        {
+          "day": "Friday",
+          "startTime": "13:20",
+          "endTime": "14:10",
+          "location": "8325",
+          "type": "Theory"
+        },
+        {
+          "day": "Friday",
+          "startTime": "14:10",
+          "endTime": "15:00",
+          "location": "B320",
+          "type": "Theory"
+        },
+        {
+          "day": "Wednesday",
+          "startTime": "11:00",
+          "endTime": "11:50",
+          "location": "B210",
+          "type": "Theory"
+        }
+      ]
+    },
+    {
+      "name": "Sathiyavathi S",
+      "group": 4,
+      "slots": [
+        {
+          "day": "Friday",
+          "startTime": "13:20",
+          "endTime": "14:10",
+          "location": "A302",
+          "type": "Theory"
+        },
+        {
+          "day": "Friday",
+          "startTime": "14:10",
+          "endTime": "15:00",
+          "location": "A102",
+          "type": "Theory"
+        },
+        {
+          "day": "Wednesday",
+          "startTime": "11:00",
+          "endTime": "11:50",
+          "location": "B411",
+          "type": "Theory"
+        }
+      ]
+    },
+    {
+      "name": "-",
+      "group": 4,
+      "slots": [
+        {
+          "day": "Friday",
+          "startTime": "10:00",
+          "endTime": "10:50",
+          "location": "B213",
+          "type": "Theory"
+        },
+        {
+          "day": "Monday",
+          "startTime": "16:00",
+          "endTime": "16:50",
+          "location": "A309",
+          "type": "Theory"
+        },
+        {
+          "day": "Thursday",
+          "startTime": "09:00",
+          "endTime": "09:50",
+          "location": "8218",
+          "type": "Theory"
+        }
+      ]
+    },
+    {
+      "name": "EM MalathY",
+      "group": 4,
+      "slots": [
+        {
+          "day": "Friday",
+          "startTime": "10:00",
+          "endTime": "10:50",
+          "location": "8408",
+          "type": "Theory"
+        },
+        {
+          "day": "Friday",
+          "startTime": "10:00",
+          "endTime": "10:50",
+          "location": "AliO",
+          "type": "Theory"
+        },
+        {
+          "day": "Monday",
+          "startTime": "16:00",
+          "endTime": "16:50",
+          "location": "A102",
+          "type": "Theory"
+        },
+        {
+          "day": "Monday",
+          "startTime": "16:00",
+          "endTime": "16:50",
+          "location": "A310",
+          "type": "Theory"
+        },
+        {
+          "day": "Thursday",
+          "startTime": "09:00",
+          "endTime": "09:50",
+          "location": "8322",
+          "type": "Theory"
+        },
+        {
+          "day": "Thursday",
+          "startTime": "09:00",
+          "endTime": "09:50",
+          "location": "8415",
+          "type": "Theory"
+        }
+      ]
+    },
+    {
+      "name": "sathiyavathi S",
+      "group": 5,
+      "slots": [
+        {
+          "day": "Friday",
+          "startTime": "10:00",
+          "endTime": "10:50",
+          "location": "B411",
+          "type": "Theory"
+        },
+        {
+          "day": "Monday",
+          "startTime": "16:00",
+          "endTime": "16:50",
+          "location": "A103",
+          "type": "Theory"
+        },
+        {
+          "day": "Thursday",
+          "startTime": "09:00",
+          "endTime": "09:50",
+          "location": "8321",
+          "type": "Theory"
+        }
+      ]
+    },
+    {
+      "name": "Chettiyar Vani Vivekanand",
+      "group": 5,
+      "slots": [
+        {
+          "day": "Friday",
+          "startTime": "10:00",
+          "endTime": "10:50",
+          "location": "A311",
+          "type": "Theory"
+        },
+        {
+          "day": "Monday",
+          "startTime": "16:00",
+          "endTime": "16:50",
+          "location": "A205",
+          "type": "Theory"
+        },
+        {
+          "day": "Thursday",
+          "startTime": "09:00",
+          "endTime": "09:50",
+          "location": "8212",
+          "type": "Theory"
+        }
+      ]
+    },
+    {
+      "name": "Bhuvaneswaran B",
+      "group": 6,
+      "slots": [
+        {
+          "day": "Friday",
+          "startTime": "08:00",
+          "endTime": "09:40",
+          "location": "KSL03",
+          "type": "Lab"
+        },
+        {
+          "day": "Monday",
+          "startTime": "10:00",
+          "endTime": "10:50",
+          "location": "ANEW104",
+          "type": "Theory"
+        },
+        {
+          "day": "Monday",
+          "startTime": "11:00",
+          "endTime": "11:50",
+          "location": "ANEW104",
+          "type": "Theory"
+        }
+      ]
+    },
+    {
+      "name": "Pravin P",
+      "group": 6,
+      "slots": [
+        {
+          "day": "Monday",
+          "startTime": "10:00",
+          "endTime": "10:50",
+          "location": "A104",
+          "type": "Theory"
+        },
+        {
+          "day": "Wednesday",
+          "startTime": "08:00",
+          "endTime": "09:40",
+          "location": "KSL03",
+          "type": "Lab"
+        }
+      ]
+    },
+    {
+      "name": "Aswana Lal",
+      "group": 6,
+      "slots": [
+        {
+          "day": "Monday",
+          "startTime": "10:00",
+          "endTime": "11:40",
+          "location": "KSL03",
+          "type": "Lab"
+        },
+        {
+          "day": "Tuesday",
+          "startTime": "10:00",
+          "endTime": "10:50",
+          "location": "ANEW104",
+          "type": "Theory"
+        },
+        {
+          "day": "Tuesday",
+          "startTime": "11:00",
+          "endTime": "11:50",
+          "location": "ANEW104",
+          "type": "Theory"
+        }
+      ]
+    },
+    {
+      "name": "S. Kaviya",
+      "group": 1,
+      "slots": [
+        {
+          "day": "Friday",
+          "startTime": "08:00",
+          "endTime": "08:50",
+          "location": "ANEW104",
+          "type": "Theory"
+        },
+        {
+          "day": "Friday",
+          "startTime": "09:00",
+          "endTime": "09:50",
+          "location": "ANEW104",
+          "type": "Theory"
+        },
+        {
+          "day": "Tuesday",
+          "startTime": "10:00",
+          "endTime": "11:40",
+          "location": "KSL03",
+          "type": "Lab"
+        }
+      ]
+    }
+  ],
+  "CS23511": [
+    {
+      "name": "S",
+      "group": 4,
+      "slots": [
+        {
+          "day": "Friday",
+          "startTime": "13:20",
+          "endTime": "14:10",
+          "location": "B321",
+          "type": "Theory"
+        },
+        {
+          "day": "Friday",
+          "startTime": "14:10",
+          "endTime": "15:00",
+          "location": "8325",
+          "type": "Theory"
+        },
+        {
+          "day": "Tuesday",
+          "startTime": "16:00",
+          "endTime": "16:50",
+          "location": "A102",
+          "type": "Theory"
+        },
+        {
+          "day": "Wednesday",
+          "startTime": "11:00",
+          "endTime": "11:50",
+          "location": "8404",
+          "type": "Theory"
+        }
+      ]
+    },
+    {
+      "name": "S Vinothini",
+      "group": 4,
+      "slots": [
+        {
+          "day": "Friday",
+          "startTime": "13:20",
+          "endTime": "14:10",
+          "location": "8410",
+          "type": "Theory"
+        },
+        {
+          "day": "Friday",
+          "startTime": "14:10",
+          "endTime": "15:00",
+          "location": "8415",
+          "type": "Theory"
+        },
+        {
+          "day": "Tuesday",
+          "startTime": "16:00",
+          "endTime": "16:50",
+          "location": "A302",
+          "type": "Theory"
+        },
+        {
+          "day": "Wednesday",
+          "startTime": "11:00",
+          "endTime": "11:50",
+          "location": "A308",
+          "type": "Theory"
+        }
+      ]
+    },
+    {
+      "name": "Jeya Mohan H",
+      "group": 4,
+      "slots": [
+        {
+          "day": "Friday",
+          "startTime": "13:20",
+          "endTime": "14:10",
+          "location": "A204",
+          "type": "Theory"
+        },
+        {
+          "day": "Friday",
+          "startTime": "14:10",
+          "endTime": "15:00",
+          "location": "A308",
+          "type": "Theory"
+        },
+        {
+          "day": "Tuesday",
+          "startTime": "16:00",
+          "endTime": "16:50",
+          "location": "A308",
+          "type": "Theory"
+        },
+        {
+          "day": "Wednesday",
+          "startTime": "11:00",
+          "endTime": "11:50",
+          "location": "8415",
+          "type": "Theory"
+        }
+      ]
+    },
+    {
+      "name": "K Ananthajothi",
+      "group": 4,
+      "slots": [
+        {
+          "day": "Friday",
+          "startTime": "13:20",
+          "endTime": "14:10",
+          "location": "8322",
+          "type": "Theory"
+        },
+        {
+          "day": "Friday",
+          "startTime": "14:10",
+          "endTime": "15:00",
+          "location": "8322",
+          "type": "Theory"
+        },
+        {
+          "day": "Tuesday",
+          "startTime": "16:00",
+          "endTime": "16:50",
+          "location": "B222",
+          "type": "Theory"
+        },
+        {
+          "day": "Wednesday",
+          "startTime": "11:00",
+          "endTime": "11:50",
+          "location": "8212",
+          "type": "Theory"
+        }
+      ]
+    },
+    {
+      "name": "Akiladevi R",
+      "group": 4,
+      "slots": [
+        {
+          "day": "Friday",
+          "startTime": "13:20",
+          "endTime": "14:10",
+          "location": "B210",
+          "type": "Theory"
+        },
+        {
+          "day": "Friday",
+          "startTime": "14:10",
+          "endTime": "15:00",
+          "location": "B218",
+          "type": "Theory"
+        },
+        {
+          "day": "Tuesday",
+          "startTime": "16:00",
+          "endTime": "16:50",
+          "location": "8210",
+          "type": "Theory"
+        },
+        {
+          "day": "Wednesday",
+          "startTime": "11:00",
+          "endTime": "11:50",
+          "location": "A311",
+          "type": "Theory"
+        }
+      ]
+    },
+    {
+      "name": "Jeya MOhanH",
+      "group": 4,
+      "slots": [
+        {
+          "day": "Friday",
+          "startTime": "10:00",
+          "endTime": "10:50",
+          "location": "A203",
+          "type": "Theory"
+        },
+        {
+          "day": "Friday",
+          "startTime": "10:00",
+          "endTime": "10:50",
+          "location": "B220",
+          "type": "Theory"
+        },
+        {
+          "day": "Friday",
+          "startTime": "15:00",
+          "endTime": "15:50",
+          "location": "8408",
+          "type": "Theory"
+        },
+        {
+          "day": "Friday",
+          "startTime": "15:00",
+          "endTime": "15:50",
+          "location": "B218",
+          "type": "Theory"
+        },
+        {
+          "day": "Monday",
+          "startTime": "16:00",
+          "endTime": "16:50",
+          "location": "A109",
+          "type": "Theory"
+        },
+        {
+          "day": "Monday",
+          "startTime": "16:00",
+          "endTime": "16:50",
+          "location": "A303",
+          "type": "Theory"
+        },
+        {
+          "day": "Thursday",
+          "startTime": "09:00",
+          "endTime": "09:50",
+          "location": "B222",
+          "type": "Theory"
+        },
+        {
+          "day": "Thursday",
+          "startTime": "09:00",
+          "endTime": "09:50",
+          "location": "B411",
+          "type": "Theory"
+        }
+      ]
+    },
+    {
+      "name": "Akil\u00e4devi R",
+      "group": 4,
+      "slots": [
+        {
+          "day": "Friday",
+          "startTime": "10:00",
+          "endTime": "10:50",
+          "location": "8415",
+          "type": "Theory"
+        },
+        {
+          "day": "Friday",
+          "startTime": "15:00",
+          "endTime": "15:50",
+          "location": "A304",
+          "type": "Theory"
+        },
+        {
+          "day": "Monday",
+          "startTime": "16:00",
+          "endTime": "16:50",
+          "location": "AliO",
+          "type": "Theory"
+        },
+        {
+          "day": "Thursday",
+          "startTime": "09:00",
+          "endTime": "09:50",
+          "location": "A204",
+          "type": "Theory"
+        }
+      ]
+    },
+    {
+      "name": "K Ananthajothi",
+      "group": 5,
+      "slots": [
+        {
+          "day": "Friday",
+          "startTime": "10:00",
+          "endTime": "10:50",
+          "location": "8402",
+          "type": "Theory"
+        },
+        {
+          "day": "Friday",
+          "startTime": "15:00",
+          "endTime": "15:50",
+          "location": "B320",
+          "type": "Theory"
+        },
+        {
+          "day": "Monday",
+          "startTime": "16:00",
+          "endTime": "16:50",
+          "location": "A108",
+          "type": "Theory"
+        },
+        {
+          "day": "Thursday",
+          "startTime": "09:00",
+          "endTime": "09:50",
+          "location": "8219",
+          "type": "Theory"
+        }
+      ]
+    },
+    {
+      "name": "Akiladevi R",
+      "group": 5,
+      "slots": [
+        {
+          "day": "Friday",
+          "startTime": "10:00",
+          "endTime": "10:50",
+          "location": "B211",
+          "type": "Theory"
+        },
+        {
+          "day": "Friday",
+          "startTime": "15:00",
+          "endTime": "15:50",
+          "location": "A102",
+          "type": "Theory"
+        },
+        {
+          "day": "Monday",
+          "startTime": "16:00",
+          "endTime": "16:50",
+          "location": "A311",
+          "type": "Theory"
+        },
+        {
+          "day": "Thursday",
+          "startTime": "09:00",
+          "endTime": "09:50",
+          "location": "8221",
+          "type": "Theory"
+        }
+      ]
+    }
+  ],
+  "CS23531": [
+    {
+      "name": "Senthil Kumar SS",
+      "group": 2,
+      "slots": [
+        {
+          "day": "Thursday",
+          "startTime": "10:00",
+          "endTime": "11:40",
+          "location": "TLGL3/4",
+          "type": "Lab"
+        },
+        {
+          "day": "Tuesday",
+          "startTime": "08:00",
+          "endTime": "09:40",
+          "location": "KSL03",
+          "type": "Lab"
+        },
+        {
+          "day": "Tuesday",
+          "startTime": "12:00",
+          "endTime": "12:50",
+          "location": "A203",
+          "type": "Theory"
+        }
+      ]
+    },
+    {
+      "name": "Anantha Sivaprakasam S",
+      "group": 2,
+      "slots": [
+        {
+          "day": "Thursday",
+          "startTime": "10:00",
+          "endTime": "11:40",
+          "location": "KSL03",
+          "type": "Lab"
+        },
+        {
+          "day": "Tuesday",
+          "startTime": "08:00",
+          "endTime": "09:40",
+          "location": "KSL03",
+          "type": "Lab"
+        },
+        {
+          "day": "Tuesday",
+          "startTime": "12:00",
+          "endTime": "12:50",
+          "location": "8302",
+          "type": "Theory"
+        }
+      ]
+    },
+    {
+      "name": "ShyniM",
+      "group": 2,
+      "slots": [
+        {
+          "day": "Thursday",
+          "startTime": "10:00",
+          "endTime": "11:40",
+          "location": "TLGL2",
+          "type": "Lab"
+        },
+        {
+          "day": "Tuesday",
+          "startTime": "08:00",
+          "endTime": "09:40",
+          "location": "Programming",
+          "type": "Lab"
+        },
+        {
+          "day": "Tuesday",
+          "startTime": "12:00",
+          "endTime": "12:50",
+          "location": "B403",
+          "type": "Theory"
+        }
+      ]
+    },
+    {
+      "name": "Karthi S",
+      "group": 2,
+      "slots": [
+        {
+          "day": "Monday",
+          "startTime": "08:00",
+          "endTime": "09:40",
+          "location": "KSL03",
+          "type": "Lab"
+        },
+        {
+          "day": "Thursday",
+          "startTime": "10:00",
+          "endTime": "10:50",
+          "location": "B404",
+          "type": "Theory"
+        },
+        {
+          "day": "Thursday",
+          "startTime": "11:00",
+          "endTime": "11:50",
+          "location": "A204",
+          "type": "Theory"
+        },
+        {
+          "day": "Tuesday",
+          "startTime": "08:00",
+          "endTime": "09:40",
+          "location": "TLFR1/2",
+          "type": "Lab"
+        },
+        {
+          "day": "Tuesday",
+          "startTime": "12:00",
+          "endTime": "12:50",
+          "location": "B405",
+          "type": "Theory"
+        }
+      ]
+    },
+    {
+      "name": "Duraimurugan N",
+      "group": 2,
+      "slots": [
+        {
+          "day": "Friday",
+          "startTime": "16:00",
+          "endTime": "16:50",
+          "location": "A304",
+          "type": "Theory"
+        },
+        {
+          "day": "Monday",
+          "startTime": "08:00",
+          "endTime": "09:40",
+          "location": "Classroom",
+          "type": "Theory"
+        },
+        {
+          "day": "Monday",
+          "startTime": "13:20",
+          "endTime": "15:00",
+          "location": "TIFAC",
+          "type": "Theory"
+        },
+        {
+          "day": "Monday",
+          "startTime": "13:20",
+          "endTime": "15:00",
+          "location": "TLGL2",
+          "type": "Lab"
+        },
+        {
+          "day": "Monday",
+          "startTime": "15:00",
+          "endTime": "15:50",
+          "location": "A103",
+          "type": "Theory"
+        },
+        {
+          "day": "Monday",
+          "startTime": "15:00",
+          "endTime": "15:50",
+          "location": "A202",
+          "type": "Theory"
+        },
+        {
+          "day": "Monday",
+          "startTime": "15:00",
+          "endTime": "15:50",
+          "location": "A303",
+          "type": "Theory"
+        },
+        {
+          "day": "Monday",
+          "startTime": "15:00",
+          "endTime": "15:50",
+          "location": "A304",
+          "type": "Theory"
+        },
+        {
+          "day": "Monday",
+          "startTime": "15:00",
+          "endTime": "15:50",
+          "location": "A310",
+          "type": "Theory"
+        },
+        {
+          "day": "Thursday",
+          "startTime": "08:00",
+          "endTime": "08:50",
+          "location": "8212",
+          "type": "Theory"
+        },
+        {
+          "day": "Thursday",
+          "startTime": "08:00",
+          "endTime": "08:50",
+          "location": "8321",
+          "type": "Theory"
+        },
+        {
+          "day": "Thursday",
+          "startTime": "08:00",
+          "endTime": "08:50",
+          "location": "8408",
+          "type": "Theory"
+        },
+        {
+          "day": "Thursday",
+          "startTime": "08:00",
+          "endTime": "08:50",
+          "location": "8415",
+          "type": "Theory"
+        },
+        {
+          "day": "Thursday",
+          "startTime": "08:00",
+          "endTime": "08:50",
+          "location": "A205",
+          "type": "Theory"
+        },
+        {
+          "day": "Thursday",
+          "startTime": "10:00",
+          "endTime": "11:40",
+          "location": "KSL03",
+          "type": "Lab"
+        },
+        {
+          "day": "Tuesday",
+          "startTime": "08:00",
+          "endTime": "08:50",
+          "location": "A309",
+          "type": "Theory"
+        },
+        {
+          "day": "Wednesday",
+          "startTime": "14:10",
+          "endTime": "15:00",
+          "location": "08:50",
+          "type": "Theory"
+        },
+        {
+          "day": "Wednesday",
+          "startTime": "14:10",
+          "endTime": "15:00",
+          "location": "1500",
+          "type": "Theory"
+        },
+        {
+          "day": "Wednesday",
+          "startTime": "14:10",
+          "endTime": "15:00",
+          "location": "8213",
+          "type": "Theory"
+        },
+        {
+          "day": "Wednesday",
+          "startTime": "14:10",
+          "endTime": "15:00",
+          "location": "A109",
+          "type": "Theory"
+        },
+        {
+          "day": "Wednesday",
+          "startTime": "14:10",
+          "endTime": "15:00",
+          "location": "A303",
+          "type": "Theory"
+        },
+        {
+          "day": "Wednesday",
+          "startTime": "15:00",
+          "endTime": "16:40",
+          "location": "Classroom",
+          "type": "Theory"
+        },
+        {
+          "day": "Wednesday",
+          "startTime": "15:00",
+          "endTime": "16:40",
+          "location": "KSL03",
+          "type": "Lab"
+        },
+        {
+          "day": "Wednesday",
+          "startTime": "15:00",
+          "endTime": "16:40",
+          "location": "TLGL2",
+          "type": "Lab"
+        }
+      ]
+    }
+  ]
+}
