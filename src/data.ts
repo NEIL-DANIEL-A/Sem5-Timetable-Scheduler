@@ -781,5 +781,5 @@ export const DAYS_ORDER = [
 ];
 
 export const GRID_START_HOUR = 8;  // 08:00
-export const GRID_END_HOUR   = 20; // 20:00
+export const GRID_END_HOUR   = 17; // 17:00
 export const GRID_TOTAL_MINS = (GRID_END_HOUR - GRID_START_HOUR) * 60; // 720 mins

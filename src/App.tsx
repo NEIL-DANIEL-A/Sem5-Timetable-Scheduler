@@ -13,6 +13,13 @@ const toMinutes = (time: string): number => {
   return h * 60 + m;
 };
 
+const getTimeColor = (startTime: string) => {
+  const hour = toMinutes(startTime) / 60;
+  if (hour < 10) return { bg: 'bg-[#30d158]/10', text: 'text-[#30d158]', label: 'Morning' };
+  if (hour < 15) return { bg: 'bg-[#0a84ff]/10', text: 'text-[#0a84ff]', label: 'Midday' };
+  return { bg: 'bg-[#ff453a]/10', text: 'text-[#ff453a]', label: 'Late' };
+};
+
 const slotsOverlap = (a: TimeSlot, b: TimeSlot): boolean => {
   if (a.day !== b.day) return false;
   const aStart = toMinutes(a.startTime);
@@ -515,18 +522,17 @@ export default function App() {
                           </div>
                           <div className="text-[10px] text-[rgba(255,255,255,0.45)] mt-0.5">Group {teacher.group} · {teacher.department}</div>
                           <div className="flex flex-wrap gap-1 mt-1.5">
-                            {teacher.slots.map((slot, i) => (
-                              <span key={i}
-                                className={`inline-flex items-center gap-0.5 px-1.5 py-0.5 rounded-md text-[8px] font-medium ${
-                                  slot.type === 'Lab'
-                                    ? 'bg-[#ff453a]/10 text-[#ff453a]'
-                                    : 'bg-[#0a84ff]/10 text-[#0a84ff]'
-                                }`}
-                              >
-                                {slot.type === 'Lab' ? <FlaskConical size={7} /> : <BookOpen size={7} />}
-                                {slot.day.slice(0,3)} {slot.startTime}–{slot.endTime}
-                              </span>
-                            ))}
+                            {teacher.slots.map((slot, i) => {
+                              const tc = getTimeColor(slot.startTime);
+                              return (
+                                <span key={i}
+                                  className={`inline-flex items-center gap-0.5 px-1.5 py-0.5 rounded-md text-[8px] font-medium ${tc.bg} ${tc.text}`}
+                                >
+                                  {slot.type === 'Lab' ? <FlaskConical size={7} /> : <BookOpen size={7} />}
+                                  {slot.day.slice(0,3)} {slot.startTime}–{slot.endTime}
+                                </span>
+                              );
+                            })}
                           </div>
                         </div>
                       </div>
@@ -642,7 +648,7 @@ export default function App() {
 
         {/* Timetable Canvas */}
         <div className="flex-1 overflow-auto p-2 md:p-4">
-          <div className="min-w-[900px] h-full flex flex-col bg-[rgba(255,255,255,0.03)] rounded-xl border border-[rgba(255,255,255,0.06)] shadow-sm" style={{ minHeight: '500px' }}>
+          <div className="min-w-[900px] h-full flex flex-col bg-[rgba(255,255,255,0.03)] rounded-xl border border-[rgba(255,255,255,0.06)] shadow-sm" style={{ minHeight: '550px' }}>
             {/* Mobile scroll hint */}
             <div className="md:hidden text-center py-1 text-[9px] text-[rgba(255,255,255,0.35)]">
               ← Scroll horizontally →
@@ -650,25 +656,25 @@ export default function App() {
 
             {/* Day Headers */}
             <div className="flex flex-shrink-0 border-b border-[rgba(255,255,255,0.06)]">
-              <div className="w-14 flex-shrink-0" />
+              <div className="w-20 flex-shrink-0" />
               {DAYS_ORDER.map(day => (
-                <div key={day} className="flex-1 text-center py-2.5">
-                  <span className="text-[11px] font-semibold text-[#f5f5f7]">{day.slice(0,3)}</span>
-                  <div className="text-[9px] text-[rgba(255,255,255,0.45)] capitalize">{day}</div>
+                <div key={day} className="flex-1 text-center py-3">
+                  <span className="text-[13px] font-semibold text-[#f5f5f7]">{day.slice(0,3)}</span>
+                  <div className="text-[11px] text-[rgba(255,255,255,0.45)] capitalize">{day}</div>
                 </div>
               ))}
             </div>
 
             {/* Grid Body */}
             <div className="flex flex-1 relative">
-              <div className="w-14 flex-shrink-0 relative border-r border-[rgba(255,255,255,0.04)]">
-                {Array.from({ length: 13 }, (_, i) => {
+              <div className="w-20 flex-shrink-0 relative border-r border-[rgba(255,255,255,0.04)]">
+                {Array.from({ length: 10 }, (_, i) => {
                   const hour = GRID_START_HOUR + i;
-                  const pct = (i / 12) * 100;
+                  const pct = (i / 9) * 100;
                   return (
-                    <div key={hour} className="absolute right-0 pr-2 flex items-center"
+                    <div key={hour} className="absolute right-0 pr-2.5 flex items-center"
                       style={{ top: `${pct}%`, transform: 'translateY(-50%)' }}>
-                      <span className="text-[9px] font-mono text-[rgba(255,255,255,0.45)]">
+                      <span className="text-[11px] font-mono text-[rgba(255,255,255,0.45)]">
                         {hour > 12 ? `${hour - 12}` : hour}:00{hour >= 12 ? 'pm' : 'am'}
                       </span>
                     </div>
@@ -680,12 +686,12 @@ export default function App() {
                 const dayEntries = timetableEntries.filter(e => e.slot.day === day);
                 return (
                   <div key={day} className="flex-1 relative border-r border-[rgba(255,255,255,0.04)]"
-                    style={{ minHeight: '600px' }}>
-                    {Array.from({ length: 13 }, (_, i) => (
-                      <div key={i} className="grid-line" style={{ top: `${(i / 12) * 100}%` }} />
+                    style={{ minHeight: '640px' }}>
+                    {Array.from({ length: 10 }, (_, i) => (
+                      <div key={i} className="grid-line" style={{ top: `${(i / 9) * 100}%` }} />
                     ))}
-                    {Array.from({ length: 12 }, (_, i) => (
-                      <div key={`half-${i}`} className="grid-line" style={{ top: `${((i + 0.5) / 12) * 100}%`, borderTopColor: 'rgba(255,255,255,0.025)' }} />
+                    {Array.from({ length: 9 }, (_, i) => (
+                      <div key={`half-${i}`} className="grid-line" style={{ top: `${((i + 0.5) / 9) * 100}%`, borderTopColor: 'rgba(255,255,255,0.025)' }} />
                     ))}
 
                     {dayEntries.map((entry, idx) => {
@@ -705,31 +711,32 @@ export default function App() {
                             right:  '3px',
                           }}
                         >
-                          <div className={`text-[10px] font-bold leading-tight truncate ${col.text}`}>
+                          <div className={`text-[12px] font-bold leading-tight truncate ${col.text}`}>
                             {entry.subject.code}
                           </div>
-                          <div className="text-[9px] text-[rgba(255,255,255,0.55)] truncate leading-tight mt-0.5">
+                          <div className="text-[11px] text-[rgba(255,255,255,0.55)] truncate leading-tight mt-0.5">
                             {entry.teacher.name}
                           </div>
                           {durationMins >= 60 && (
                             <div className="flex items-center gap-0.5 mt-1">
-                              <span className={`inline-flex items-center gap-0.5 px-1 py-0.5 rounded text-[8px] font-medium ${
-                                entry.slot.type === 'Lab'
-                                  ? 'bg-[#ff453a]/10 text-[#ff453a]'
-                                  : 'bg-[#0a84ff]/10 text-[#0a84ff]'
-                              }`}>
-                                {entry.slot.type === 'Lab' ? <FlaskConical size={7} /> : <BookOpen size={7} />}
-                                {entry.slot.type}
-                              </span>
+                              {(() => {
+                                const tc = getTimeColor(entry.slot.startTime);
+                                return (
+                                  <span className={`inline-flex items-center gap-0.5 px-1.5 py-0.5 rounded text-[10px] font-medium ${tc.bg} ${tc.text}`}>
+                                    {entry.slot.type === 'Lab' ? <FlaskConical size={9} /> : <BookOpen size={9} />}
+                                    {entry.slot.type}
+                                  </span>
+                                );
+                              })()}
                             </div>
                           )}
                           {durationMins >= 80 && (
                             <div className="flex items-center gap-0.5 mt-0.5">
-                              <MapPin size={7} className="text-[rgba(255,255,255,0.45)] flex-shrink-0" />
-                              <span className="text-[8px] text-[rgba(255,255,255,0.45)] truncate">{entry.slot.location}</span>
+                              <MapPin size={9} className="text-[rgba(255,255,255,0.45)] flex-shrink-0" />
+                              <span className="text-[10px] text-[rgba(255,255,255,0.45)] truncate">{entry.slot.location}</span>
                             </div>
                           )}
-                          <div className="text-[7px] text-[rgba(255,255,255,0.45)] font-mono mt-0.5 leading-none">
+                          <div className="text-[9px] text-[rgba(255,255,255,0.45)] font-mono mt-0.5 leading-none">
                             {entry.slot.startTime}\u2013{entry.slot.endTime}
                           </div>
                         </div>
@@ -750,18 +757,22 @@ export default function App() {
             return (
               <div key={s.id} className="flex items-center gap-1.5">
                 <div className={`w-2 h-2 rounded-sm border-l-2 ${col.border} ${col.bg}`} />
-                <span className={`text-[9px] font-medium ${col.text}`}>{s.code}</span>
+                <span className={`text-[9px] font-medium ${col.text}`}>{s.name}</span>
               </div>
             );
           })}
           <div className="ml-auto flex items-center gap-3">
             <div className="flex items-center gap-1">
+              <span className="inline-block w-2.5 h-1.5 rounded-sm bg-[#30d158]/20 border-l-2 border-[#30d158]" />
+              <span className="text-[9px] text-[rgba(255,255,255,0.45)]">8–10 AM</span>
+            </div>
+            <div className="flex items-center gap-1">
               <span className="inline-block w-2.5 h-1.5 rounded-sm bg-[#0a84ff]/20 border-l-2 border-[#0a84ff]" />
-              <span className="text-[9px] text-[rgba(255,255,255,0.45)]">Theory</span>
+              <span className="text-[9px] text-[rgba(255,255,255,0.45)]">10–3 PM</span>
             </div>
             <div className="flex items-center gap-1">
               <span className="inline-block w-2.5 h-1.5 rounded-sm bg-[#ff453a]/20 border-l-2 border-[#ff453a]" />
-              <span className="text-[9px] text-[rgba(255,255,255,0.45)]">Lab</span>
+              <span className="text-[9px] text-[rgba(255,255,255,0.45)]">3–5 PM</span>
             </div>
           </div>
         </div>
