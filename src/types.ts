@@ -41,3 +41,11 @@ export type OptimizationStrategy =
   | 'BALANCED_BREAKS'
   | 'EARLY_BIRD'
   | 'NIGHT_OWL';
+
+export interface Draft {
+  id: string;
+  name: string;
+  selections: SelectionState;
+  strategy: OptimizationStrategy | null;
+  savedAt: number;
+}

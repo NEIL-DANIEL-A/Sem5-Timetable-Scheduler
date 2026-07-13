@@ -99,13 +99,26 @@ html, body, #root {
   padding: 2px;
 }
 
+.sidebar-tabs {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2px;
+  background: rgba(255, 255, 255, 0.06);
+  border-radius: 10px;
+  padding: 2px;
+}
+
 @media (max-width: 767px) {
   .segmented-control {
     grid-template-columns: repeat(2, 1fr);
   }
+  .sidebar-tabs {
+    grid-template-columns: repeat(3, 1fr);
+  }
 }
 
-.segmented-control button {
+.segmented-control button,
+.sidebar-tabs button {
   padding: 6px 4px;
   border-radius: 8px;
   font-size: 11px;
@@ -118,18 +131,21 @@ html, body, #root {
 }
 
 @media (max-width: 767px) {
-  .segmented-control button {
-    padding: 10px 6px;
-    font-size: 12px;
+  .segmented-control button,
+  .sidebar-tabs button {
+    padding: 10px 4px;
+    font-size: 11px;
   }
 }
 
-.segmented-control button.active {
+.segmented-control button.active,
+.sidebar-tabs button.active {
   background: rgba(255, 255, 255, 0.12);
   color: #0a84ff;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
 }
-.segmented-control button:not(.active):hover {
+.segmented-control button:not(.active):hover,
+.sidebar-tabs button:not(.active):hover {
   color: rgba(255, 255, 255, 0.7);
 }
 

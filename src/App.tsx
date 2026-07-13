@@ -6,7 +6,7 @@ import {
   TrendingDown, Activity, Menu, X
 } from 'lucide-react';
 import { SUBJECTS, DAYS_ORDER, GRID_START_HOUR, GRID_TOTAL_MINS } from './data';
-import { Subject, Teacher, TimeSlot, SelectionState, OptimizationStrategy, Day } from './types';
+import { Subject, Teacher, TimeSlot, SelectionState, OptimizationStrategy, Day, Draft } from './types';
 
 const toMinutes = (time: string): number => {
   const [h, m] = time.split(':').map(Number);
@@ -214,11 +214,24 @@ const STRATEGIES: { id: OptimizationStrategy; label: string; icon: React.ReactNo
   { id: 'NIGHT_OWL',       label: 'Night Owl',  icon: <Moon size={12} />         },
 ];
 
-const LS_KEY = 'rosterpro_selections';
+const LS_KEY = 'csescheduler_selections';
+const LS_DRAFTS_KEY = 'csescheduler_drafts';
+const LS_OLD_KEY = 'rosterpro_selections';
+
+const migrateOldKey = () => {
+  try {
+    const old = localStorage.getItem(LS_OLD_KEY);
+    if (old) {
+      localStorage.setItem(LS_KEY, old);
+      localStorage.removeItem(LS_OLD_KEY);
+    }
+  } catch {}
+};
 
 export default function App() {
   const [selections, setSelections] = useState<SelectionState>(() => {
     try {
+      migrateOldKey();
       const saved = localStorage.getItem(LS_KEY);
       return saved ? JSON.parse(saved) : {};
     } catch { return {}; }
@@ -230,11 +243,22 @@ export default function App() {
   const [lastStrategy, setLastStrategy] = useState<OptimizationStrategy | null>(null);
   const [optimizerMsg, setOptimizerMsg] = useState('');
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const [selectionsExpanded, setSelectionsExpanded] = useState(false);
+  const [sidebarView, setSidebarView] = useState<'instructors' | 'selections' | 'drafts'>('instructors');
+  const [drafts, setDrafts] = useState<Draft[]>(() => {
+    try {
+      const saved = localStorage.getItem(LS_DRAFTS_KEY);
+      return saved ? JSON.parse(saved) : [];
+    } catch { return []; }
+  });
+  const [draftName, setDraftName] = useState('');
 
   useEffect(() => {
     localStorage.setItem(LS_KEY, JSON.stringify(selections));
   }, [selections]);
+
+  useEffect(() => {
+    localStorage.setItem(LS_DRAFTS_KEY, JSON.stringify(drafts));
+  }, [drafts]);
 
   const selectedSlots = useMemo<TimeSlot[]>(() => {
     const result: TimeSlot[] = [];
@@ -316,6 +340,35 @@ export default function App() {
         alert('No conflict-free combination found for the given dataset.');
       }
     }, 1800);
+  }, []);
+
+  const handleSaveDraft = useCallback(() => {
+    const name = draftName.trim();
+    if (!name) return;
+    const existing = drafts.findIndex(d => d.name === name);
+    const draft: Draft = {
+      id: existing >= 0 ? drafts[existing].id : Date.now().toString(),
+      name,
+      selections: { ...selections },
+      strategy: lastStrategy,
+      savedAt: Date.now(),
+    };
+    setDrafts(prev => {
+      const next = [...prev];
+      if (existing >= 0) next[existing] = draft;
+      else next.push(draft);
+      return next;
+    });
+    setDraftName('');
+  }, [draftName, drafts, selections, lastStrategy]);
+
+  const handleLoadDraft = useCallback((draft: Draft) => {
+    setSelections(draft.selections);
+    setLastStrategy(draft.strategy);
+  }, []);
+
+  const handleDeleteDraft = useCallback((id: string) => {
+    setDrafts(prev => prev.filter(d => d.id !== id));
   }, []);
 
   const timetableEntries = useMemo(() => {
@@ -438,8 +491,8 @@ export default function App() {
           </div>
         </div>
 
-        {/* Subject Picker */}
-        {!selectionsExpanded && (
+        {/* Subject Picker — only on instructors view */}
+        {sidebarView === 'instructors' && (
         <div className="px-4 pt-2 pb-1">
           <div className="flex items-center gap-1.5 mb-2">
             <BookOpen size={11} className="text-[#0a84ff]" />
@@ -484,11 +537,12 @@ export default function App() {
         </div>
         )}
 
-        {/* ── Flex-1 Zone: Teacher List OR Expanded Selections ── */}
+        {/* ── Flex-1 Zone: 3 Views ── */}
         <div className="flex-1 overflow-y-auto px-4 pb-2">
-          {!selectionsExpanded ? (
+
+          {/* VIEW: Instructors */}
+          {sidebarView === 'instructors' && (
             <>
-              {/* Teacher List */}
               <div className="flex items-center gap-1.5 mb-2 mt-1">
                 <Users size={11} className="text-[#0a84ff]" />
                 <span className="text-[10px] font-semibold text-[rgba(255,255,255,0.45)] uppercase tracking-wider">Instructors</span>
@@ -541,10 +595,12 @@ export default function App() {
                 })}
               </div>
             </>
-          ) : (
+          )}
+
+          {/* VIEW: Selections */}
+          {sidebarView === 'selections' && (
             <>
-              {/* Expanded Selections */}
-              <div className="flex items-center gap-1.5 mb-3 mt-1">
+              <div className="flex items-center gap-1.5 mb-2 mt-1">
                 <AlignJustify size={11} className="text-[#0a84ff]" />
                 <span className="text-[10px] font-semibold text-[rgba(255,255,255,0.45)] uppercase tracking-wider">All Selections</span>
                 <span className="ml-auto text-[10px] text-[rgba(255,255,255,0.3)]">{completedCount}/{SUBJECTS.length} done</span>
@@ -585,34 +641,123 @@ export default function App() {
               </div>
             </>
           )}
+
+          {/* VIEW: Drafts */}
+          {sidebarView === 'drafts' && (
+            <>
+              <div className="flex items-center gap-1.5 mb-3 mt-1">
+                <BookOpen size={11} className="text-[#0a84ff]" />
+                <span className="text-[10px] font-semibold text-[rgba(255,255,255,0.45)] uppercase tracking-wider">Saved Drafts</span>
+                <span className="ml-auto text-[10px] text-[rgba(255,255,255,0.3)]">{drafts.length} saved</span>
+              </div>
+
+              {/* Save Draft Input */}
+              <div className="flex items-center gap-1.5 mb-3">
+                <input
+                  type="text"
+                  value={draftName}
+                  onChange={e => setDraftName(e.target.value)}
+                  onKeyDown={e => e.key === 'Enter' && handleSaveDraft()}
+                  placeholder="Name your draft..."
+                  className="flex-1 min-w-0 px-2.5 py-2 rounded-lg text-[11px] bg-[rgba(255,255,255,0.04)] border border-[rgba(255,255,255,0.08)] text-[#f5f5f7] placeholder:text-[rgba(255,255,255,0.25)] outline-none focus:border-[#0a84ff]/40 transition-all"
+                />
+                <button
+                  onClick={handleSaveDraft}
+                  disabled={!draftName.trim()}
+                  className="px-3 py-2 rounded-lg text-[11px] font-medium bg-[#0a84ff]/15 text-[#0a84ff] hover:bg-[#0a84ff]/25 transition-all disabled:opacity-30 disabled:cursor-not-allowed flex-shrink-0"
+                >
+                  Save
+                </button>
+              </div>
+
+              {/* Drafts List */}
+              {drafts.length === 0 ? (
+                <div className="flex flex-col items-center justify-center py-10 text-center">
+                  <BookOpen size={28} className="text-[rgba(255,255,255,0.1)] mb-3" />
+                  <div className="text-[11px] text-[rgba(255,255,255,0.3)]">No drafts saved yet</div>
+                  <div className="text-[9px] text-[rgba(255,255,255,0.2)] mt-1">Save your current schedule above</div>
+                </div>
+              ) : (
+                <div className="flex flex-col gap-1.5">
+                  {drafts.map(draft => (
+                    <div key={draft.id}
+                      className="apple-card p-3"
+                    >
+                      <div className="flex items-start justify-between gap-2 mb-2">
+                        <div className="flex-1 min-w-0">
+                          <div className="text-[11px] font-semibold text-[#f5f5f7] truncate">{draft.name}</div>
+                          <div className="text-[9px] text-[rgba(255,255,255,0.35)] mt-0.5">
+                            {new Date(draft.savedAt).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })}
+                            {draft.strategy && ` · ${STRATEGIES.find(s => s.id === draft.strategy)?.label}`}
+                          </div>
+                        </div>
+                        <button
+                          onClick={() => handleDeleteDraft(draft.id)}
+                          className="p-1 rounded-md text-[rgba(255,255,255,0.3)] hover:text-[#ff453a] hover:bg-[#ff453a]/10 transition-all flex-shrink-0"
+                        >
+                          <Trash2 size={11} />
+                        </button>
+                      </div>
+                      {/* Preview: show selected subjects */}
+                      <div className="flex flex-wrap gap-1 mb-2">
+                        {SUBJECTS.filter(s => draft.selections[s.id]).map(s => {
+                          const col = getColor(s.id);
+                          return (
+                            <span key={s.id} className={`inline-flex items-center gap-1 px-1.5 py-0.5 rounded text-[8px] font-medium ${col.bg} ${col.text}`}>
+                              <span className={`w-1 h-1 rounded-full ${col.dot}`} />
+                              {s.code}
+                            </span>
+                          );
+                        })}
+                      </div>
+                      <button
+                        onClick={() => handleLoadDraft(draft)}
+                        className="w-full py-1.5 rounded-lg text-[10px] font-medium text-[#30d158] bg-[#30d158]/10 hover:bg-[#30d158]/20 transition-all"
+                      >
+                        Load Draft
+                      </button>
+                    </div>
+                  ))}
+                </div>
+              )}
+            </>
+          )}
+
         </div>
 
-        {/* Footer Toggle Bar (always visible) */}
-        <div className="border-t border-[rgba(255,255,255,0.06)] bg-[rgba(0,0,0,0.2)]">
-          <button
-            onClick={() => setSelectionsExpanded(o => !o)}
-            className="w-full flex items-center justify-between px-4 py-2.5 hover:bg-[rgba(255,255,255,0.03)] transition-colors cursor-pointer"
-          >
-            <div className="flex items-center gap-1.5">
-              <AlignJustify size={11} className="text-[rgba(255,255,255,0.45)]" />
-              <span className="text-[10px] font-semibold text-[rgba(255,255,255,0.45)] uppercase tracking-wider">
-                {selectionsExpanded ? 'Back to Instructors' : 'Selections'}
-              </span>
-              <span className="text-[10px] text-[rgba(255,255,255,0.3)]">({completedCount}/{SUBJECTS.length})</span>
-            </div>
-            <div className="flex items-center gap-2.5">
-              <div className="w-16 h-1 rounded-full bg-[rgba(255,255,255,0.06)] overflow-hidden">
-                <div className="h-full rounded-full transition-all duration-500"
-                  style={{
-                    width: `${(completedCount / SUBJECTS.length) * 100}%`,
-                    background: completedCount === SUBJECTS.length
-                      ? '#30d158'
-                      : '#0a84ff',
-                  }} />
+        {/* Footer: 3-Tab Segmented Control (always visible) */}
+        <div className="border-t border-[rgba(255,255,255,0.06)] bg-[rgba(0,0,0,0.2)] px-3 py-2.5">
+          <div className="sidebar-tabs">
+            <button
+              onClick={() => setSidebarView('instructors')}
+              className={sidebarView === 'instructors' ? 'active' : ''}
+            >
+              <div className="flex items-center justify-center gap-1">
+                <Users size={11} />
+                <span>Instructors</span>
               </div>
-              <ChevronDown size={12} className={`text-[rgba(255,255,255,0.45)] transition-transform duration-200 ${selectionsExpanded ? 'rotate-180' : ''}`} />
-            </div>
-          </button>
+            </button>
+            <button
+              onClick={() => setSidebarView('selections')}
+              className={sidebarView === 'selections' ? 'active' : ''}
+            >
+              <div className="flex items-center justify-center gap-1">
+                <AlignJustify size={11} />
+                <span>Selections</span>
+                <span className="text-[8px] opacity-60">({completedCount})</span>
+              </div>
+            </button>
+            <button
+              onClick={() => setSidebarView('drafts')}
+              className={sidebarView === 'drafts' ? 'active' : ''}
+            >
+              <div className="flex items-center justify-center gap-1">
+                <BookOpen size={11} />
+                <span>Drafts</span>
+                {drafts.length > 0 && <span className="text-[8px] opacity-60">({drafts.length})</span>}
+              </div>
+            </button>
+          </div>
         </div>
       </aside>
 
