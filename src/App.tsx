@@ -1,10 +1,9 @@
 import React, { useState, useCallback, useMemo, useEffect } from 'react';
-import { Analytics } from "@vercel/analytics/next"
 import {
   Cpu, Zap, Calendar, Clock, Trash2, ChevronDown, CheckCircle2,
   XCircle, Sparkles, BarChart3, Sun, Moon, AlignJustify, Minus,
   BookOpen, Users, MapPin, FlaskConical, GraduationCap, RotateCcw,
-  TrendingDown, Activity
+  TrendingDown, Activity, Menu, X
 } from 'lucide-react';
 import { SUBJECTS, DAYS_ORDER, GRID_START_HOUR, GRID_TOTAL_MINS } from './data';
 import { Subject, Teacher, TimeSlot, SelectionState, OptimizationStrategy, Day } from './types';
@@ -223,6 +222,8 @@ export default function App() {
   const [optimizing, setOptimizing] = useState(false);
   const [lastStrategy, setLastStrategy] = useState<OptimizationStrategy | null>(null);
   const [optimizerMsg, setOptimizerMsg] = useState('');
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [selectionsExpanded, setSelectionsExpanded] = useState(false);
 
   useEffect(() => {
     localStorage.setItem(LS_KEY, JSON.stringify(selections));
@@ -330,6 +331,14 @@ export default function App() {
   return (
     <div className="flex h-screen w-screen overflow-hidden" style={{ background: '#1c1c1e' }}>
 
+      {/* ── Mobile Menu Button ── */}
+      <button
+        onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+        className="fixed top-3 left-3 z-40 md:hidden p-2 rounded-lg bg-[rgba(30,30,32,0.85)] backdrop-blur-md border border-[rgba(255,255,255,0.1)] text-[#f5f5f7]"
+      >
+        {mobileMenuOpen ? <X size={20} /> : <Menu size={20} />}
+      </button>
+
       {/* ── Optimization Overlay ── */}
       {optimizing && (
         <div className="fixed inset-0 z-50 flex flex-col items-center justify-center overlay-blur">
@@ -356,10 +365,22 @@ export default function App() {
       )}
 
       {/* ── LEFT SIDEBAR ── */}
-      <aside className="flex flex-col w-[340px] min-w-[340px] h-full apple-sidebar">
+      <aside className={`
+        fixed md:static inset-y-0 left-0 z-30
+        flex flex-col w-[340px] min-w-[340px] h-full apple-sidebar
+        transform transition-transform duration-300 ease-in-out
+        ${mobileMenuOpen ? 'translate-x-0' : '-translate-x-full md:translate-x-0'}
+      `}>
+        {/* Mobile Overlay */}
+        {mobileMenuOpen && (
+          <div 
+            className="fixed inset-0 z-[-1] md:hidden bg-black/50"
+            onClick={() => setMobileMenuOpen(false)}
+          />
+        )}
 
         {/* Header */}
-        <div className="px-4 pt-4 pb-3 border-b border-[rgba(255,255,255,0.06)]">
+        <div className="px-4 pt-12 md:pt-4 pb-3 border-b border-[rgba(255,255,255,0.06)]">
           <div className="flex items-center gap-2.5">
             <div className="w-7 h-7 rounded-lg flex items-center justify-center" style={{ background: '#0a84ff' }}>
               <GraduationCap size={14} className="text-white" />
@@ -411,6 +432,7 @@ export default function App() {
         </div>
 
         {/* Subject Picker */}
+        {!selectionsExpanded && (
         <div className="px-4 pt-2 pb-1">
           <div className="flex items-center gap-1.5 mb-2">
             <BookOpen size={11} className="text-[#0a84ff]" />
@@ -453,159 +475,178 @@ export default function App() {
             )}
           </div>
         </div>
+        )}
 
-        {/* Stats Bar */}
-        <div className="px-4 py-2 flex gap-2">
-          <div className="flex-1 flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg bg-[rgba(255,255,255,0.04)] border border-[rgba(255,255,255,0.06)]">
-            <Calendar size={11} className="text-[#0a84ff]" />
-            <span className="text-[10px] text-[rgba(255,255,255,0.45)]">
-              <span className="font-semibold text-[#f5f5f7]">{stats.activeDays}</span> day{stats.activeDays !== 1 ? 's' : ''}
-            </span>
-          </div>
-          <div className="flex-1 flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg bg-[rgba(255,255,255,0.04)] border border-[rgba(255,255,255,0.06)]">
-            <Clock size={11} className="text-[#ff9f0a]" />
-            <span className="text-[10px] text-[rgba(255,255,255,0.45)]">
-              <span className="font-semibold text-[#f5f5f7]">{stats.totalGapMins}</span> gap{stats.totalGapMins !== 1 ? 's' : ''}
-            </span>
-          </div>
-          <div className="flex items-center gap-1 px-2.5 py-1.5 rounded-lg bg-[rgba(255,255,255,0.04)] border border-[rgba(255,255,255,0.06)]">
-            <span className={`text-[11px] font-semibold ${completedCount === SUBJECTS.length ? 'text-[#30d158]' : 'text-[#f5f5f7]'}`}>
-              {completedCount}/{SUBJECTS.length}
-            </span>
-          </div>
-        </div>
-
-        {/* Teacher List */}
+        {/* ── Flex-1 Zone: Teacher List OR Expanded Selections ── */}
         <div className="flex-1 overflow-y-auto px-4 pb-2">
-          <div className="flex items-center gap-1.5 mb-2 mt-1">
-            <Users size={11} className="text-[#0a84ff]" />
-            <span className="text-[10px] font-semibold text-[rgba(255,255,255,0.45)] uppercase tracking-wider">Instructors</span>
-            <span className="ml-auto text-[10px] text-[rgba(255,255,255,0.45)]">{activeSubject.teachers.length} available</span>
-          </div>
-          <div className="flex flex-col gap-1.5">
-            {activeSubject.teachers.map(teacher => {
-              const isSelected  = selections[activeSubjectId] === teacher.id;
-              const isConflict  = conflictingTeacherIds.has(teacher.id);
-              return (
-                <button
-                  key={teacher.id}
-                  id={`teacher-card-${teacher.id}`}
-                  disabled={isConflict}
-                  onClick={() => !isConflict && handleTeacherSelect(activeSubjectId, teacher.id)}
-                  className={`w-full text-left p-2.5 rounded-xl border transition-all ${
-                    isConflict  ? 'apple-card disabled' :
-                    isSelected  ? 'apple-card selected' :
-                    'apple-card'
-                  }`}
-                >
-                  <div className="flex items-start gap-2.5">
-                    <div className={`w-8 h-8 rounded-full flex items-center justify-center text-[11px] font-semibold flex-shrink-0 ${getInitialBg(teacher.name)}`}>
-                      {getInitials(teacher.name)}
-                    </div>
-                    <div className="flex-1 min-w-0">
-                      <div className="flex items-center justify-between">
-                        <div className="text-xs font-semibold text-[#f5f5f7] truncate">{teacher.name}</div>
-                        {isSelected && <CheckCircle2 size={14} className="text-[#0a84ff] flex-shrink-0 ml-1" />}
-                        {isConflict && <XCircle size={14} className="text-[#ff453a]/60 flex-shrink-0 ml-1" />}
+          {!selectionsExpanded ? (
+            <>
+              {/* Teacher List */}
+              <div className="flex items-center gap-1.5 mb-2 mt-1">
+                <Users size={11} className="text-[#0a84ff]" />
+                <span className="text-[10px] font-semibold text-[rgba(255,255,255,0.45)] uppercase tracking-wider">Instructors</span>
+                <span className="ml-auto text-[10px] text-[rgba(255,255,255,0.45)]">{activeSubject.teachers.length} available</span>
+              </div>
+              <div className="flex flex-col gap-1.5">
+                {activeSubject.teachers.map(teacher => {
+                  const isSelected  = selections[activeSubjectId] === teacher.id;
+                  const isConflict  = conflictingTeacherIds.has(teacher.id);
+                  return (
+                    <button
+                      key={teacher.id}
+                      id={`teacher-card-${teacher.id}`}
+                      disabled={isConflict}
+                      onClick={() => !isConflict && handleTeacherSelect(activeSubjectId, teacher.id)}
+                      className={`w-full text-left p-2.5 rounded-xl border transition-all ${
+                        isConflict  ? 'apple-card disabled' :
+                        isSelected  ? 'apple-card selected' :
+                        'apple-card'
+                      }`}
+                    >
+                      <div className="flex items-start gap-2.5">
+                        <div className={`w-8 h-8 rounded-full flex items-center justify-center text-[11px] font-semibold flex-shrink-0 ${getInitialBg(teacher.name)}`}>
+                          {getInitials(teacher.name)}
+                        </div>
+                        <div className="flex-1 min-w-0">
+                          <div className="flex items-center justify-between">
+                            <div className="text-xs font-semibold text-[#f5f5f7] truncate">{teacher.name}</div>
+                            {isSelected && <CheckCircle2 size={14} className="text-[#0a84ff] flex-shrink-0 ml-1" />}
+                            {isConflict && <XCircle size={14} className="text-[#ff453a]/60 flex-shrink-0 ml-1" />}
+                          </div>
+                          <div className="text-[10px] text-[rgba(255,255,255,0.45)] mt-0.5">Group {teacher.group} · {teacher.department}</div>
+                          <div className="flex flex-wrap gap-1 mt-1.5">
+                            {teacher.slots.map((slot, i) => (
+                              <span key={i}
+                                className={`inline-flex items-center gap-0.5 px-1.5 py-0.5 rounded-md text-[8px] font-medium ${
+                                  slot.type === 'Lab'
+                                    ? 'bg-[#ff453a]/10 text-[#ff453a]'
+                                    : 'bg-[#0a84ff]/10 text-[#0a84ff]'
+                                }`}
+                              >
+                                {slot.type === 'Lab' ? <FlaskConical size={7} /> : <BookOpen size={7} />}
+                                {slot.day.slice(0,3)} {slot.startTime}–{slot.endTime}
+                              </span>
+                            ))}
+                          </div>
+                        </div>
                       </div>
-                      <div className="text-[10px] text-[rgba(255,255,255,0.45)] mt-0.5">Group {teacher.group} · {teacher.department}</div>
-                      <div className="flex flex-wrap gap-1 mt-1.5">
-                        {teacher.slots.map((slot, i) => (
-                          <span key={i}
-                            className={`inline-flex items-center gap-0.5 px-1.5 py-0.5 rounded-md text-[8px] font-medium ${
-                              slot.type === 'Lab'
-                                ? 'bg-[#ff453a]/10 text-[#ff453a]'
-                                : 'bg-[#0a84ff]/10 text-[#0a84ff]'
-                            }`}
-                          >
-                            {slot.type === 'Lab' ? <FlaskConical size={7} /> : <BookOpen size={7} />}
-                            {slot.day.slice(0,3)} {slot.startTime}–{slot.endTime}
-                          </span>
-                        ))}
+                    </button>
+                  );
+                })}
+              </div>
+            </>
+          ) : (
+            <>
+              {/* Expanded Selections */}
+              <div className="flex items-center gap-1.5 mb-3 mt-1">
+                <AlignJustify size={11} className="text-[#0a84ff]" />
+                <span className="text-[10px] font-semibold text-[rgba(255,255,255,0.45)] uppercase tracking-wider">All Selections</span>
+                <span className="ml-auto text-[10px] text-[rgba(255,255,255,0.3)]">{completedCount}/{SUBJECTS.length} done</span>
+              </div>
+              <div className="flex flex-col gap-1.5">
+                {SUBJECTS.map(subj => {
+                  const tid = selections[subj.id];
+                  const teacher = subj.teachers.find(t => t.id === tid);
+                  const col = getColor(subj.id);
+                  return (
+                    <div key={subj.id}
+                      className={`flex items-center gap-2.5 p-2.5 rounded-xl border transition-all ${
+                        tid ? 'apple-card selected' : 'apple-card opacity-50'
+                      }`}
+                    >
+                      <div className={`w-2 h-2 rounded-full flex-shrink-0 ${col.dot}`} />
+                      <div className="flex-1 min-w-0">
+                        <div className="flex items-center gap-1.5">
+                          <span className="text-[10px] font-bold text-[#f5f5f7]">{subj.code}</span>
+                          <span className="text-[9px] text-[rgba(255,255,255,0.35)]">{subj.name}</span>
+                        </div>
+                        <div className="text-[9px] text-[rgba(255,255,255,0.45)] mt-0.5">
+                          {teacher ? `${teacher.name} · Group ${teacher.group} · ${teacher.department}` : 'Not selected'}
+                        </div>
                       </div>
+                      {tid && (
+                        <button
+                          id={`deselect-${subj.id}`}
+                          onClick={() => setSelections(prev => ({ ...prev, [subj.id]: null }))}
+                          className="p-1 rounded-md text-[rgba(255,255,255,0.45)] hover:text-[#ff453a] hover:bg-[#ff453a]/10 transition-all flex-shrink-0"
+                        >
+                          <Minus size={10} />
+                        </button>
+                      )}
                     </div>
-                  </div>
-                </button>
-              );
-            })}
-          </div>
+                  );
+                })}
+              </div>
+            </>
+          )}
         </div>
 
-        {/* Footer: Current Selections */}
-        <div className="border-t border-[rgba(255,255,255,0.06)] px-4 py-3 bg-[rgba(0,0,0,0.2)]">
-          <div className="flex items-center justify-between mb-2">
+        {/* Footer Toggle Bar (always visible) */}
+        <div className="border-t border-[rgba(255,255,255,0.06)] bg-[rgba(0,0,0,0.2)]">
+          <button
+            onClick={() => setSelectionsExpanded(o => !o)}
+            className="w-full flex items-center justify-between px-4 py-2.5 hover:bg-[rgba(255,255,255,0.03)] transition-colors cursor-pointer"
+          >
             <div className="flex items-center gap-1.5">
               <AlignJustify size={11} className="text-[rgba(255,255,255,0.45)]" />
-              <span className="text-[10px] font-semibold text-[rgba(255,255,255,0.45)] uppercase tracking-wider">Selections</span>
+              <span className="text-[10px] font-semibold text-[rgba(255,255,255,0.45)] uppercase tracking-wider">
+                {selectionsExpanded ? 'Back to Instructors' : 'Selections'}
+              </span>
+              <span className="text-[10px] text-[rgba(255,255,255,0.3)]">({completedCount}/{SUBJECTS.length})</span>
             </div>
-            <div className="w-20 h-1 rounded-full bg-[rgba(255,255,255,0.06)] overflow-hidden">
-              <div className="h-full rounded-full transition-all duration-500"
-                style={{
-                  width: `${(completedCount / SUBJECTS.length) * 100}%`,
-                  background: completedCount === SUBJECTS.length
-                    ? '#30d158'
-                    : '#0a84ff',
-                }} />
+            <div className="flex items-center gap-2.5">
+              <div className="w-16 h-1 rounded-full bg-[rgba(255,255,255,0.06)] overflow-hidden">
+                <div className="h-full rounded-full transition-all duration-500"
+                  style={{
+                    width: `${(completedCount / SUBJECTS.length) * 100}%`,
+                    background: completedCount === SUBJECTS.length
+                      ? '#30d158'
+                      : '#0a84ff',
+                  }} />
+              </div>
+              <ChevronDown size={12} className={`text-[rgba(255,255,255,0.45)] transition-transform duration-200 ${selectionsExpanded ? 'rotate-180' : ''}`} />
             </div>
-          </div>
-          <div className="flex flex-col gap-1">
-            {SUBJECTS.map(subj => {
-              const tid = selections[subj.id];
-              const teacher = subj.teachers.find(t => t.id === tid);
-              const col = getColor(subj.id);
-              return (
-                <div key={subj.id}
-                  className={`flex items-center gap-2 px-2 py-1 rounded-lg transition-all ${tid ? '' : 'opacity-40'}`}
-                  style={{ background: tid ? 'rgba(255,255,255,0.03)' : 'transparent' }}>
-                  <div className={`w-1.5 h-1.5 rounded-full flex-shrink-0 ${col.dot}`} />
-                  <div className="flex-1 min-w-0">
-                    <div className="text-[10px] font-medium text-[#f5f5f7] truncate">{subj.code}</div>
-                    <div className="text-[8px] text-[rgba(255,255,255,0.45)] truncate">{teacher ? `${teacher.name} · Grp ${teacher.group}` : 'Not selected'}</div>
-                  </div>
-                  {tid && (
-                    <button
-                      id={`deselect-${subj.id}`}
-                      onClick={() => setSelections(prev => ({ ...prev, [subj.id]: null }))}
-                      className="p-0.5 rounded text-[rgba(255,255,255,0.45)] hover:text-[#ff453a] hover:bg-[#ff453a]/10 transition-all flex-shrink-0"
-                    >
-                      <Minus size={9} />
-                    </button>
-                  )}
-                </div>
-              );
-            })}
-          </div>
+          </button>
         </div>
       </aside>
 
       {/* ── RIGHT: TIMETABLE VIEWPORT ── */}
-      <main className="flex-1 flex flex-col h-full overflow-hidden" style={{ background: '#1c1c1e' }}>
+      <main className="flex-1 flex flex-col h-full overflow-hidden md:w-auto w-full" style={{ background: '#1c1c1e' }}>
 
         {/* Viewport Header */}
-        <div className="flex items-center justify-between px-5 py-3 border-b border-[rgba(255,255,255,0.06)] flex-shrink-0 bg-[rgba(30,30,32,0.8)]" style={{ backdropFilter: 'blur(20px)' }}>
+        <div className="flex items-center justify-between px-3 md:px-5 py-3 border-b border-[rgba(255,255,255,0.06)] flex-shrink-0 bg-[rgba(30,30,32,0.8)]" style={{ backdropFilter: 'blur(20px)' }}>
           <div className="flex items-center gap-2">
             <Calendar size={13} className="text-[#0a84ff]" />
             <span className="text-sm font-semibold text-[#f5f5f7]">Weekly Schedule</span>
           </div>
-          <div className="flex items-center gap-2">
-            <div className="flex items-center gap-1.5 px-2.5 py-1 rounded-lg bg-[rgba(255,255,255,0.04)] border border-[rgba(255,255,255,0.06)]">
+          <div className="flex items-center gap-1.5 md:gap-2">
+            <div className="hidden md:flex items-center gap-1.5 px-2.5 py-1 rounded-lg bg-[rgba(255,255,255,0.04)] border border-[rgba(255,255,255,0.06)]">
               <Calendar size={11} className="text-[#0a84ff]" />
               <span className="text-[10px] text-[rgba(255,255,255,0.45)]">
                 <span className="font-semibold text-[#f5f5f7]">{stats.activeDays}</span> day{stats.activeDays !== 1 ? 's' : ''}
               </span>
             </div>
-            <div className="flex items-center gap-1.5 px-2.5 py-1 rounded-lg bg-[rgba(255,255,255,0.04)] border border-[rgba(255,255,255,0.06)]">
+            <div className="hidden md:flex items-center gap-1.5 px-2.5 py-1 rounded-lg bg-[rgba(255,255,255,0.04)] border border-[rgba(255,255,255,0.06)]">
               <Clock size={11} className="text-[#ff9f0a]" />
               <span className="text-[10px] text-[rgba(255,255,255,0.45)]">
                 <span className="font-semibold text-[#f5f5f7]">{stats.totalGapMins}</span> gap{stats.totalGapMins !== 1 ? 's' : ''}
+              </span>
+            </div>
+            <div className="flex md:hidden items-center gap-1.5 px-2 py-1 rounded-lg bg-[rgba(255,255,255,0.04)] border border-[rgba(255,255,255,0.06)]">
+              <span className={`text-[11px] font-semibold ${completedCount === SUBJECTS.length ? 'text-[#30d158]' : 'text-[#f5f5f7]'}`}>
+                {completedCount}/{SUBJECTS.length}
               </span>
             </div>
           </div>
         </div>
 
         {/* Timetable Canvas */}
-        <div className="flex-1 overflow-auto p-4">
-          <div className="min-w-[900px] h-full flex flex-col bg-[rgba(255,255,255,0.03)] rounded-xl border border-[rgba(255,255,255,0.06)] shadow-sm" style={{ minHeight: '700px' }}>
+        <div className="flex-1 overflow-auto p-2 md:p-4">
+          <div className="min-w-[900px] h-full flex flex-col bg-[rgba(255,255,255,0.03)] rounded-xl border border-[rgba(255,255,255,0.06)] shadow-sm" style={{ minHeight: '500px' }}>
+            {/* Mobile scroll hint */}
+            <div className="md:hidden text-center py-1 text-[9px] text-[rgba(255,255,255,0.35)]">
+              ← Scroll horizontally →
+            </div>
 
             {/* Day Headers */}
             <div className="flex flex-shrink-0 border-b border-[rgba(255,255,255,0.06)]">
@@ -702,7 +743,7 @@ export default function App() {
         </div>
 
         {/* Bottom legend */}
-        <div className="flex-shrink-0 border-t border-[rgba(255,255,255,0.06)] px-5 py-2 flex items-center gap-4 bg-[rgba(0,0,0,0.15)]">
+        <div className="flex-shrink-0 border-t border-[rgba(255,255,255,0.06)] px-3 md:px-5 py-2 flex flex-wrap items-center gap-2 md:gap-4 bg-[rgba(0,0,0,0.15)]">
           <span className="text-[9px] text-[rgba(255,255,255,0.45)] uppercase tracking-wider font-semibold">Legend</span>
           {SUBJECTS.map(s => {
             const col = getColor(s.id);

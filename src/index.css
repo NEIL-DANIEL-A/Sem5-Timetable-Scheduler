@@ -63,7 +63,16 @@ html, body, #root {
   border: 1px solid rgba(255, 255, 255, 0.06);
   border-radius: 12px;
   transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  touch-action: manipulation;
 }
+
+@media (max-width: 767px) {
+  .apple-card {
+    min-height: 44px;
+    padding: 12px 14px;
+  }
+}
+
 .apple-card:hover {
   background: rgba(255, 255, 255, 0.08);
   border-color: rgba(0, 122, 255, 0.25);
@@ -89,6 +98,13 @@ html, body, #root {
   border-radius: 10px;
   padding: 2px;
 }
+
+@media (max-width: 767px) {
+  .segmented-control {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
 .segmented-control button {
   padding: 6px 4px;
   border-radius: 8px;
@@ -98,7 +114,16 @@ html, body, #root {
   transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
   position: relative;
   cursor: pointer;
+  min-height: 32px;
 }
+
+@media (max-width: 767px) {
+  .segmented-control button {
+    padding: 10px 6px;
+    font-size: 12px;
+  }
+}
+
 .segmented-control button.active {
   background: rgba(255, 255, 255, 0.12);
   color: #0a84ff;
